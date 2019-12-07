@@ -6,10 +6,10 @@ BUF_SZ = 1024  # tcp receive buffer size
 BACKLOG = 12
 
 class AS(object):
-    def __init__(self, a, b, c, addr, port):
-        self.key_a_as = a
-        self.key_b_as = b
-        self.key_as_tgs = c
+    def __init__(self, addr, port):
+        # self.key_a_as = a
+        # self.key_b_as = b
+        # self.key_as_tgs = c
         self.listener = self.start_a_server(addr, port)
 
 
@@ -18,18 +18,18 @@ class AS(object):
         listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         listener.bind((addr, port))
-        # listener.listen(BACKLOG)
+        listener.listen(1)
         return listener
 
-    def run(self):
-        print('AS is on ({}, {})'.format(addr, port))
-        while True:
-            try:
-                peer, addr = self.listener.accept() 
-                threading.Thread(target = self.receive_message, args = (peer, addr)).start()
-
-            except Exception as err:
-                print('accept failed {}'.format(err))   
+#     def run(self, addr, port):
+#         print('AS is on ({}, {})'.format(addr, port))
+#         while True:
+#             try:
+#                 peer, address = self.listener.accept() 
+                # 
+# 
+#             except Exception as err:
+#                 print('accept failed {}'.format(err))   
 
     def receive_message(self, peer, addr):
         while True:
@@ -77,3 +77,15 @@ class AS(object):
 
         print("Response with msg: ", msg)
         peer.sendall(pickle.dumps(msg))
+
+def main():
+    socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    socket.bind(('localhost', 50001)
+    socket.listen(1)
+    print("init auth server")
+    conn, addr = as_server.listener.accept()
+    print("got connection")
+
+if __name__ == '__main__':
+    main()
