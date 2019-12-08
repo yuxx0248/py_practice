@@ -46,16 +46,32 @@ def main():
 
 	client = CLIENT(host, tgs_port)
 	client.connect()
-	client.send(b"This is client A calling tgs server yall")
+	client.send(b"b")
 
 	data = client.recv()
 	print (data)
 
 	# decrypt data from tgs
-#	f = Fernet(tgs_key)
-#	data = f.decrypt(data)
-#	print(data)
+	f = Fernet(tgs_key)
+	value = f.decrypt(data).decode()
 
+        # decode register information arr = data
+	arr = value.split(",")
+	key_path = arr[0]
+	port = arr[1]
+
+	# talk to b service
+	client = CLIENT(host, int(port))
+	client.connect()
+	client.send(b"Client A have found you")
+
+	with open(key_path, "rb") as file:
+		btgs_key = file.read()
+	data = client.recv()
+	f = Fernet(btgs_key)
+	final_message = f.decrypt(data).decode()
+
+	print (final_message)
 
 if __name__ == '__main__':
     main()
