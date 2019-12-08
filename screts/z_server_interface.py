@@ -21,10 +21,3 @@ class SERVER(object):
  
         conn.close()
         print ("client disconnected")
-
-def main():
-    server = SERVER('localhost', 8080)
-    server.serve()
-
-if __name__ == '__main__':
-    main()
