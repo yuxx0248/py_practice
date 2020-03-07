@@ -34,6 +34,6 @@ img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
 # print(nparr)
 # # decode image
 # img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-cv2.imwrite("fliped.jpg", img)
+cv2.imwrite("edited/fliped.jpg", img)
 
 # expected output: {u'message': u'image received. size=124x124'}
