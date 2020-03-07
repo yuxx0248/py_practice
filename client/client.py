@@ -4,7 +4,7 @@ import json
 import cv2
 
 addr = 'http://localhost:5000'
-test_url = addr + '/api/test'
+test_url = addr + '/api/flip'
 
 # prepare headers for http request
 content_type = 'image/jpeg'

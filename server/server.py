@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 # route http posts to this method
-@app.route('/api/test', methods=['POST'])
+@app.route('/api/flip', methods=['POST'])
 def test():	
     r = request
     print("get the request!")
