@@ -19,7 +19,11 @@ def test():
 
     # do some fancy processing here....
     print("fancy stuffs")
-    _, img_encoded = cv2.imencode('.jpeg', img)
+    flip = cv2.flip(img, 0)
+    # _, img_encoded = cv2.imencode('.jpeg', img)
+    print("saving a fliped image")
+    # Create and add usertoek in the path if needed
+    cv2.imwrite("tmp/fliped.jpg", flip)
 
     # build a response dict to send back to client
     response = {'message': 'image received. size={}x{}'.format(img.shape[1], img.shape[0])
@@ -29,7 +33,7 @@ def test():
 
     print("respoding")
     # return send_file()
-    return Response(response=response_pickled, data=img_encoded.tostring(), atus=200, mimetype="application/json")
+    return Response(response=response_pickled, status=200, mimetype="application/json")
 
 
 # start flask app
